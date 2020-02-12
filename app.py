@@ -1,11 +1,11 @@
 from chalice import Chalice
+import chalicelib.pandas_test as pt
 
 app = Chalice(app_name='helloworld')
 
-
-@app.route('/blah')
-def index():
-    return {'hello': 'world'}
+@app.route('/pandas/add/{x}/{y}')
+def add_df(x, y):
+    return {'result': pt.add_df(x, y)}
 
 @app.route('/add/{x}/{y}')
 def add(x, y):
@@ -22,7 +22,6 @@ def multiply(x, y):
 @app.route('/divide/{x}/{y}')
 def divide(x, y):
     return {'result': float(x) / float(y)}
-
 
 # The view function above will return {"hello": "world"}
 # whenever you make an HTTP GET request to '/'.
